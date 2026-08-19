@@ -31,6 +31,9 @@ public:
     // Refresh entire accumulator (slow, used when incremental fails)
     void refresh(const Position& pos);
     
+    // Initialize weights with heuristic patterns (public for Network access)
+    void initialize_weights();
+    
 private:
     AccumulatorState state_;
     
@@ -44,9 +47,6 @@ private:
     
     // Apply activation function
     void apply_activation();
-    
-    // Initialize weights with heuristic patterns
-    void initialize_weights();
 };
 
 } // namespace nnue

@@ -36,7 +36,3 @@ EvalTerms NnueEvaluation::get_terms(const Position& pos) {
 void NnueEvaluation::use_nnue(bool enable) {
     use_nnue_ = enable;
 }
-
-bool NnueEvaluation::using_nnue() const {
-    return use_nnue_;
-}

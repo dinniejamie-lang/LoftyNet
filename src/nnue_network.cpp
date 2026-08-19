@@ -1,6 +1,8 @@
 #include "nnue_network.h"
 #include "nnue_simd.h"
+#include "nnue_weight_initializer.h"
 #include <cmath>
+#include <algorithm>
 #include <fstream>
 
 namespace nnue {

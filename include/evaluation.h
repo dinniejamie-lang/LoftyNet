@@ -36,9 +36,11 @@ public:
     // Is position a draw by insufficient material?
     static bool is_draw_material(const Position& pos);
     
+    // Material evaluation (public for NNUE hybrid evaluation)
+    static Score evaluate_material(const Position& pos, Color c);
+    
 private:
     // Evaluation components
-    static Score evaluate_material(const Position& pos, Color c);
     static Score evaluate_pieces(const Position& pos, Color c);
     static Score evaluate_mobility(const Position& pos, Color c);
     static Score evaluate_king_safety(const Position& pos, Color c);

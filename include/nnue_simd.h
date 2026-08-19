@@ -21,11 +21,18 @@ namespace simd {
 // Check if SIMD is available
 #if defined(__AVX2__)
     #define NNUE_USE_AVX2 1
-#elif defined(__SSE2__) || defined(_M_X64)
+#endif
+
+#if defined(__SSE2__) && !defined(NNUE_USE_AVX2)
     #define NNUE_USE_SSE2 1
-#else
+#endif
+
+#if !defined(NNUE_USE_AVX2) && !defined(NNUE_USE_SSE2)
     #define NNUE_USE_SCALAR 1
 #endif
+
+// AVX2 optimized functions
+#if defined(NNUE_USE_AVX2)
 
 // AVX2 optimized ReLU activation
 inline void relu_activation_avx2(int16_t* output, const int16_t* input, int size) {
@@ -84,7 +91,10 @@ inline int32_t dot_product_avx2(const int16_t* a, const int16_t* b, int size) {
     return result;
 }
 
-#elif defined(NNUE_USE_SSE2)
+#endif // NNUE_USE_AVX2
+
+// SSE2 optimized functions
+#if defined(NNUE_USE_SSE2)
 #include <emmintrin.h>
 
 // SSE2 optimized ReLU activation
@@ -133,7 +143,7 @@ inline int32_t dot_product_sse2(const int16_t* a, const int16_t* b, int size) {
     return result;
 }
 
-#endif
+#endif // NNUE_USE_SSE2
 
 // Generic (fallback) implementations
 inline void relu_activation_scalar(int16_t* output, const int16_t* input, int size) {
