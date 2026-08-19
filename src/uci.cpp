@@ -1,4 +1,5 @@
 #include "uci.h"
+#include "movegen.h"
 #include <iostream>
 #include <sstream>
 #include <cstring>
@@ -82,7 +83,6 @@ void UCI::cmd_position(const std::string& cmd) {
         while (iss >> move_str) {
             // Parse move and make it
             MoveList moves;
-            #include "movegen.h"
             MoveGenerator::generate_all(position_, moves);
             
             for (int i = 0; i < moves.size(); ++i) {
